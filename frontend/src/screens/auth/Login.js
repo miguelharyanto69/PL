@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from 'react-redux';
 import auth from "../../assets/image/auth.png";
 import { LoginHandler } from "../../slices/AuthSlice";
+import { Alert } from "../../components";
 
 const Login = () => {
     const navigate = useNavigate();
     const { token } = useSelector(state=>state.auth);
+    const { open } = useSelector(state=>state.alert);
     const dispatch = useDispatch();
     const [loginForm,setLoginForm] = useState({
          email:"",
@@ -16,11 +18,9 @@ const Login = () => {
     useEffect(()=> {
         document.title = "Login";
 
-        if(token) {
-            navigate("/home");
+        if(token && token != 'null') {
+            navigate("/");
         }
-
-        console.log('test');
     },[token]);
 
     const changeHandler = (e) => setLoginForm({...loginForm, [e.target.name]:e.target.value});
@@ -38,6 +38,7 @@ const Login = () => {
             backgroundPosition:"center"
         }} className="w-full h-screen flex items-center justify-center">
             <section className="bg-white rounded-lg py-5 px-5">
+                {open ? <Alert/> : null}
                 <h3 className="text-center font-bold text-2xl uppercase">sign in</h3>
                 <form  onSubmit={submitHandler} className="mt-5 flex flex-col gap-y-3">
                     <input placeholder="Email" type="email" onChange={changeHandler} name="email" className="border-b outline-none border-gray-300 pb-3 w-[450px]" value={loginForm?.email}/>

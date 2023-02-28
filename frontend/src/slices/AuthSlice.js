@@ -1,7 +1,7 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import decode from "jwt-decode";
 import axios from 'axios';
-import { openAlert } from "./AlertSlice";
+import { closeAlert, openAlert } from "./AlertSlice";
 
 const API = axios.create({
     baseURL:`${process.env.REACT_APP_BASE_URL}/auth`
@@ -47,9 +47,21 @@ export const RegisterHandler = createAsyncThunk('auth/register' , async ({ regis
       const { data } = await API.post("/register" , registerForm);
 
       if(data) {
+        dispatch(openAlert({
+             message:"Success create account",
+             variant:"bg-green-50",
+             textVariant:"text-green-500",
+             open:true
+        }));
         return navigate("/");
       }
     } catch(err) {
+        dispatch(openAlert({
+            open:true,
+            message:err.response.data.message,
+            variant:"bg-red-50",
+            textVariant:"text-red-500"
+       }));
         return null;
     }
 });
@@ -58,14 +70,15 @@ const AuthSlice = createSlice({
     name:'auth',
     initialState:{
         user:user != null ? decode(user) : null,
-        token:null,
+        token:user,
     },
     extraReducers:(builder)=>{
         builder.addCase(LoginHandler.fulfilled,(state, { payload }) => {
              if(payload){
-                 state.token = payload.token;
-                 state.user = decode(payload.token);
+                 state.token = payload.access_token;
+                 state.user = decode(payload.access_token);
                  
+                 sessionStorage.setItem("token" , JSON.stringify(state.token));
                  return state;
              }
         });

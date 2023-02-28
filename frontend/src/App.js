@@ -2,14 +2,16 @@ import { Routes,Route } from 'react-router-dom';
 import { 
   Login ,
   Register,
-  Auth
+  Auth,
+  Homepage
 } from "./screens";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Auth/>}>
-        <Route path="/" element={<Login/>}/>
+      <Route index element={<Homepage/>}/>
+      <Route path="/auth" element={<Auth/>}>
+        <Route path="login" element={<Login/>}/>
         <Route path="register" element={<Register/>}/>
       </Route>
     </Routes>

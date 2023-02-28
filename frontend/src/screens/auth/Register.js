@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import auth from "../../assets/image/auth.png";
 import { useSelector,useDispatch } from "react-redux";
 import { RegisterHandler } from "../../slices/AuthSlice";
+import { Alert } from "../../components";
 
 const Register = () => {
     const navigate = useNavigate();
     const { token } = useSelector(state=>state.auth);
+    const { open } = useSelector(state=>state.alert);
     const dispatch = useDispatch();
     const [registerForm,setRegisterForm] = useState({
         username:"",
@@ -17,7 +19,12 @@ const Register = () => {
 
     useEffect(() => {
         document.title = "Register";
-    },[]);
+         
+        if(token && token != 'null') {
+            return navigate("/");
+        }
+
+    },[token]);
 
     const changeHandler = (e) => setRegisterForm({...registerForm, [e.target.name]:e.target.value});
 
@@ -35,6 +42,7 @@ const Register = () => {
             backgroundPosition:"center"
         }} className="w-full h-screen flex items-center justify-center">
             <section className="bg-white rounded-lg py-5 px-5">
+                {open ? <Alert/> : null}
                 <h3 className="text-center font-bold text-2xl uppercase">sign up</h3>
                 <form onSubmit={submitHandler} className="mt-5 flex flex-col gap-y-3">
                 <input placeholder="Username" type="text" onChange={changeHandler} name="username" className="border-b outline-none border-gray-300 pb-3 w-[450px]" value={registerForm?.username}/>
