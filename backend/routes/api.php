@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 //controller
 use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Profile\ProfileController;
+
 
 //auth prefix
 
@@ -13,6 +15,10 @@ Route::group(['prefix'=>'/auth'],function(){
      Route::post('/register', [AuthenticationController::class, 'register'])->name('register');
 
 }); 
+
+Route::group(['prefix'=>'/profile'] , function(){
+     Route::get('{id}', [ProfileController::class, 'profile'])->name('profile');
+});
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

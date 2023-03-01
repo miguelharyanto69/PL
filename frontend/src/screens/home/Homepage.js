@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useNavigate , Link } from 'react-router-dom';
 import avatar from "../../assets/image/avatar.jpg";
-import { Navbar } from "../../components";
+import { Navbar,Footer } from "../../components";
 import light from "../../assets/image/light-bg.png";
 import dark from "../../assets/image/dark-bg.png";
 import axios from 'axios';
+import { fetchMovies } from "../../api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -26,15 +27,6 @@ const Homepage = () => {
    const [upComing,setUpComing] = useState([]);
    const { auth } = useSelector(state=>state);
 
-   const fetchNoShowingCinema = async (url,setMovies) => {
-       try {
-         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${url}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-         setMovies(data.results);
-       } catch(err) {
-          return err;
-       }
-   }
-
    useEffect(()=>{
      document.title = "Homepage";
 
@@ -42,11 +34,8 @@ const Homepage = () => {
         navigate("/auth/login");
     }
  
-    fetchNoShowingCinema('now_playing',setNowShowing);
-    fetchNoShowingCinema('upcoming',setUpComing);
-
-    
-
+    fetchMovies('now_playing',setNowShowing);
+     fetchMovies('upcoming',setUpComing);
    },[auth])
 
     return (
@@ -131,6 +120,7 @@ const Homepage = () => {
         ))}       
       </Swiper>
              </section>
+             <Footer/>
         </div>
     )
 };

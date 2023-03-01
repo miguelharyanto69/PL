@@ -3,13 +3,17 @@ import {
   Login ,
   Register,
   Auth,
-  Homepage
+  Homepage,
+  Profile,
+  Movies
 } from "./screens";
 
 function App() {
   return (
     <Routes>
       <Route index element={<Homepage/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/movies" element={<Movies/>}/>
       <Route path="/auth" element={<Auth/>}>
         <Route path="login" element={<Login/>}/>
         <Route path="register" element={<Register/>}/>

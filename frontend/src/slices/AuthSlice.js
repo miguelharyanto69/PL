@@ -72,6 +72,16 @@ const AuthSlice = createSlice({
         user:user != null ? decode(user) : null,
         token:user,
     },
+    reducers:{
+         logoutHandler(state){
+             state.token = null;
+             state.user = null;
+
+             sessionStorage.setItem('token' , JSON.stringify(state.token));
+
+             return state;
+         }
+    },
     extraReducers:(builder)=>{
         builder.addCase(LoginHandler.fulfilled,(state, { payload }) => {
              if(payload){
@@ -84,5 +94,7 @@ const AuthSlice = createSlice({
         });
     }
 });
+
+export const { logoutHandler } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
