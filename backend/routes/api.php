@@ -18,6 +18,8 @@ Route::group(['prefix'=>'/auth'],function(){
 
 Route::group(['prefix'=>'/profile'] , function(){
      Route::get('{id}', [ProfileController::class, 'profile'])->name('profile');
+     Route::put('/update/{id}', [ProfileController::class, 'updateProfile'])->name('profile.update');
+     Route::put('/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

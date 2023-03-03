@@ -58,9 +58,11 @@ const Movies = () => {
         className="mySwiper mt-7"
       >
          {Array.isArray(movies) && movies.map((movie,idx) => (
-          <SwiperSlide key={idx}>
+           <Link to={`/movie/${movie?.id}`}>
+           <SwiperSlide key={idx}>
            <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
           </SwiperSlide>
+           </Link>
          ))}
       </Swiper>
               </div>
@@ -90,7 +92,7 @@ const Movies = () => {
 
                 {Array.isArray(movies) && movies.map((movie,idx)=>(
                    <SwiperSlide key={idx}>
-                   <Link to={`/movie/detail/${movie.id}`}>
+                   <Link to={`/movie/${movie.id}`}>
                    <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
                    </Link>
                 </SwiperSlide>

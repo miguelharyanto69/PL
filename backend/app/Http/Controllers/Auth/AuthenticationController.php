@@ -16,6 +16,11 @@ class AuthenticationController extends Controller {
              'password'=>['required' , 'min:6']
          ]);
 
+         $find_user = User::where('email' , $request->email)->first();
+
+         if(!$find_user) {
+            return response()->json(['message'=>'Authentication failed , user not found'] , 401);
+         }
  
          if (!$token = Auth::attempt($validate)) {
             return response()->json(['message' => 'Unauthorized'], 401);

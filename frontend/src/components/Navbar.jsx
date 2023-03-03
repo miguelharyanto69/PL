@@ -48,7 +48,7 @@ const Navbar = () => {
             </li>
 
             <li>
-                <Link to="/">
+                <Link to="/community">
                     <span className={`${pathname==="/community" ? "text-orange-500" : "text-white"}  font-semibold text-[17px]`}>Community</span>
                 </Link>
             </li>

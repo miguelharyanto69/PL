@@ -76,7 +76,7 @@ const Homepage = () => {
       >
         {nowShowing?.map((movie,idx) => (
         <SwiperSlide key={idx}>
-           <Link to={`/movie/detail/${movie.id}`}>
+           <Link to={`/movie/${movie.id}`}>
            <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
            </Link>
         </SwiperSlide>
@@ -113,7 +113,7 @@ const Homepage = () => {
       >
         {upComing?.map((movie,idx) => (
         <SwiperSlide key={idx}>
-           <Link to={`/movie/detail/${movie.id}`}>
+           <Link to={`/movie/${movie.id}`}>
            <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
            </Link>
         </SwiperSlide>

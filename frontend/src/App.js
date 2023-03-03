@@ -5,7 +5,9 @@ import {
   Auth,
   Homepage,
   Profile,
-  Movies
+  Movies,
+  Movie,
+  Community
 } from "./screens";
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Route index element={<Homepage/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/movies" element={<Movies/>}/>
+      <Route path="/community" element={<Community/>}/>
+      <Route path="/movie/:id" element={<Movie/>}/>
       <Route path="/auth" element={<Auth/>}>
         <Route path="login" element={<Login/>}/>
         <Route path="register" element={<Register/>}/>
