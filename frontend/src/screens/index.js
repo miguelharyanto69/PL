@@ -3,12 +3,17 @@ import Register from "./auth/Register";
 import Homepage from "./home/Homepage";
 import Profile from "./home/Profile";
 import Movies from "./home/Movies";
-import News from "./home/News";
 import Movie from "./home/Movie";
 import Community from "./home/Community";
+import Chat from "./home/Chat";
+import HomeAdmin from "./admin/HomeAdmin";
+import Create from "./admin/Create";
+import News from "./home/News";
 
 //nesting main
 import Auth from "./auth/Main";
+import MainHome from "./home/MainHome";
+import MainAdmin from "./admin/MainAdmin";
 
 export {
     Login,
@@ -17,7 +22,12 @@ export {
     Auth,
     Profile,
     Movies,
-    News,
     Movie,
-    Community
+    Community,
+    Chat,
+    MainHome,
+    MainAdmin,
+    HomeAdmin,
+    Create,
+    News
 };

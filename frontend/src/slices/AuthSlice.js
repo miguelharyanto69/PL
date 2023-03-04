@@ -69,7 +69,7 @@ export const RegisterHandler = createAsyncThunk('auth/register' , async ({ regis
 const AuthSlice = createSlice({
     name:'auth',
     initialState:{
-        user:user != null ? decode(user) : null,
+        user:user !== null && user !== 'null'  ? decode(user) : null,
         token:user,
     },
     reducers:{

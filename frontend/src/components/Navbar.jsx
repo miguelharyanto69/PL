@@ -3,7 +3,7 @@ import navbar from "../assets/image/navbar-bg.png";
 import logo from "../assets/image/logo.png";
 import { Link,useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { HiOutlineUserCircle,HiOutlineTicket } from 'react-icons/hi';
+import { HiOutlineUserCircle,HiOutlineTicket,HiOutlineUser } from 'react-icons/hi';
 import { BsChatLeft } from 'react-icons/bs';
 import { IoIosLogOut } from 'react-icons/io';
 import { closeAlert } from "../slices/AlertSlice";
@@ -37,7 +37,7 @@ const Navbar = () => {
                 </Link>
             </li>
             <li>
-                <Link to="/">
+                <Link to="/news">
                     <span className={`${pathname==="/news" ? "text-orange-500" : "text-white"}  font-semibold text-[17px]`}>News</span>
                 </Link>
             </li>
@@ -63,7 +63,7 @@ const Navbar = () => {
         
         </ul>
        {openDropDown ? (
-         <div className='bg-white py-4 px-10 rounded-lg flex flex-col gap-y-3 absolute -bottom-[160px] right-12'>
+         <div className='bg-white py-4 px-10 rounded-lg flex flex-col gap-y-3 absolute -bottom-[190px] right-12'>
           <Link to="/profile" className="flex items-center gap-x-3 text-gray-600">
              <HiOutlineUserCircle className="text-xl"/>
              <p>Profile</p>
@@ -76,6 +76,12 @@ const Navbar = () => {
              <BsChatLeft className="text-xl"/>
              <p>Chat</p>
           </Link>
+          {auth?.user?.isAdmin === 1 ? (
+             <Link to="/admin" className="flex items-center gap-x-3 text-gray-600">
+                <HiOutlineUser className="text-xl" />
+                <p>Admin</p>
+             </Link>
+          ) : null}
           <button onClick={()=>dispatch(logoutHandler())} className="flex items-center gap-x-3 text-gray-600">
              <IoIosLogOut className="text-xl"/>
              <p>Logout</p>

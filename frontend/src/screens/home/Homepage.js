@@ -25,18 +25,13 @@ const Homepage = () => {
    const [loading,setLoading] = useState(false);
    const [nowShowing,setNowShowing] = useState([]);
    const [upComing,setUpComing] = useState([]);
-   const { auth } = useSelector(state=>state);
+   const { auth,admin } = useSelector(state=>state);
 
    useEffect(()=>{
      document.title = "Homepage";
-
-    if(!auth.token || auth.token == 'null'){
-        navigate("/auth/login");
-    }
- 
     fetchMovies('now_playing',setNowShowing);
      fetchMovies('upcoming',setUpComing);
-   },[auth])
+   },[auth]);
 
     return (
         <div
@@ -92,8 +87,12 @@ const Homepage = () => {
              }}
              className="w-full py-20 px-20">
                 <h2 className="text-xl uppercase font-bold text-white">spotlight</h2>
-
-             </section>
+                {admin?.spotlight?.length == 0 && auth?.user?.isAdmin ? <div className="flex justify-center items-center">
+                  <Link to="/admin/create">
+                    <button className="mt-7 bg-orange-500 text-white font-semibold  py-2 px-5 rounded-full">Create Spotlight</button>
+                  </Link>
+                </div> : null}
+             </section> 
              <section className="py-20 px-20">
              <h2 className="text-xl uppercase font-bold text-white">coming soon</h2>
              <Swiper

@@ -7,17 +7,31 @@ import {
   Profile,
   Movies,
   Movie,
-  Community
+  Community,
+  Chat,
+  MainHome,
+  MainAdmin,
+  HomeAdmin,
+  Create,
+  News
 } from "./screens";
 
 function App() {
   return (
     <Routes>
-      <Route index element={<Homepage/>}/>
+      <Route path="/" element={<MainHome/>}>
+      <Route path="/" element={<Homepage/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/movies" element={<Movies/>}/>
       <Route path="/community" element={<Community/>}/>
       <Route path="/movie/:id" element={<Movie/>}/>
+      <Route path="/chat" element={<Chat/>}/>
+      <Route path="/news" element={<News/>}/>
+      </Route>
+      <Route path="/admin" element={<MainAdmin/>}>
+        <Route index element={<HomeAdmin/>}/>
+        <Route path="create" element={<Create/>}/>
+      </Route>
       <Route path="/auth" element={<Auth/>}>
         <Route path="login" element={<Login/>}/>
         <Route path="register" element={<Register/>}/>

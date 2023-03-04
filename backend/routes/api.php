@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 //controller
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
 
 
 //auth prefix
@@ -19,7 +20,14 @@ Route::group(['prefix'=>'/auth'],function(){
 Route::group(['prefix'=>'/profile'] , function(){
      Route::get('{id}', [ProfileController::class, 'profile'])->name('profile');
      Route::put('/update/{id}', [ProfileController::class, 'updateProfile'])->name('profile.update');
-     Route::put('/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+     Route::post('/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+});
+
+Route::group(['prefix'=>'/admin'] ,function(){
+     Route::get('/all/news', [AdminController::class, 'all_news'])->name('all.news');
+     Route::get('/all/spotlight', [AdminController::class,'all_spotlight'])->name('all.spotlight');
+     Route::post("/create/news/{id}", [AdminController::class,'create_news'])->name('create.news');
+     Route::post("/create/spotlight/{id}", [AdminController::class,"create_spotlight"])->name('create.spotlight');  
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

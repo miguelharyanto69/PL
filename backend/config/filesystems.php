@@ -46,10 +46,24 @@ return [
 
         'profile_image'=>[
            'driver'=>'local',
-           'root'=>storage_path('app/public/profile_user/'),
-           'url'=>'storage/profile_user',
+           'root'=>storage_path('app/public/profile_image/'),
+           'url'=>'storage/profile_image/',
            'visibility'=>'public'
         ],
+        
+        'news_image'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/public/news_image/'),
+            'url'=>'storage/news_image/',
+            'visibility'=>'public'
+         ],
+
+         'spotlight_image'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/public/spotlight_image/'),
+            'url'=>'storage/spotlight_image/',
+            'visibility'=>'public'
+         ],
 
         's3' => [
             'driver' => 's3',

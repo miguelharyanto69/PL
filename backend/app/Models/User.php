@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+//models
+use App\Models\Spotlight;
+use App\Models\News;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -29,7 +32,8 @@ class User extends Authenticatable implements JWTSubject
         'city',
         'phone',
         'avatar',
-        'description'
+        'description',
+        'isAdmin'
     ];
 
     /**
@@ -51,6 +55,18 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function spotlights(){
+        if($this->isAdmin == 1) {
+            return $this->hasMany(Spotlight::class,'admin_id', 'id');
+        }
+    }
+
+    public function news(){
+        if($this->isAdmin == 1) {
+            return $this->hasMany(News::class,'admin_id', 'id');
+        }
+    }
+
     public function getJWTIdentifier() {
         return $this->getKey();
     }
@@ -63,7 +79,8 @@ class User extends Authenticatable implements JWTSubject
         return [
             'username'=>$this->username,
             'id'=>$this->id,
-            'email'=>$this->email
+            'email'=>$this->email,
+            'isAdmin'=>$this->isAdmin
         ];
     }    
 }

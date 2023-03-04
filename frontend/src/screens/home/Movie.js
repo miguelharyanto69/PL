@@ -10,6 +10,9 @@ const Movie = () => {
    const [movie,setMovie] = useState(null);
 
    useEffect(() => {
+
+      document.title = `Movie | ${movie?.id}`;
+
        fetchMovie(id ,setMovie);
    } ,[id]);
  

@@ -6,7 +6,8 @@ import { createSlice,createAsyncThunk
  const token = sessionStorage.getItem('token') || null;
 
  const API = axios.create({
-    baseURL:`http://127.0.0.1:8000/api/profile`
+    baseURL:`http://127.0.0.1:8000/api/profile`,
+
  });
 
 
@@ -26,6 +27,9 @@ import { createSlice,createAsyncThunk
             textVariant:'text-blue-500',
         })
      );
+
+     console.log(profile);
+
       try {
         const { data } = await API.put(`/update/${id}`,profile);
         setProfile(data);
@@ -41,13 +45,16 @@ import { createSlice,createAsyncThunk
       }
  });
 
- export const updateAvatar = createAsyncThunk('profile/avatar-update' , async ({ id,imagePend }) => {
+ export const updateAvatar = createAsyncThunk('profile/avatar-update' , async ({ id,setProfile, profile,image }) => {
      const formData = new FormData();
 
-     formData.append('avatar' , imagePend);
+     formData.append('avatar' , image);
 
       try { 
-        const { data } = await API.put(`/update/profile/${id}`, formData);
+        const { data } = await API.post(`/update/avatar/${id}`, formData);
+        if(data) {
+           setProfile({...profile , avatar:`http://localhost:8000/storage/profile_image/${data.avatar}`});
+        }
       } catch(err) {
         return null;
       }

@@ -41,24 +41,25 @@ const Profile = () => {
     },[]);
 
     const updateProfileFn = (e) => {
-        e.preventDefault();
+       e.preventDefault();
        dispatch(updateProfileSlice({ setProfile, profile,id:auth?.user?.id,dispatch }));
-       dispatch(updateAvatar({ avatar:avatarRef , id:auth?.user?.id }));
     }
-
+    
     const imageHandler = (element) => {
-        var file = element.target.files[0];
-        var reader = new FileReader();
+        const file = element.target.files[0];
+        const reader = new FileReader();
         reader.onloadend = function() {
-          setProfile({...profile , avatar:file});
-          avatarRef.current = reader.result;
+           
+            setProfile({...profile ,avatar:reader.result});
+            dispatch(updateAvatar({ setProfile, profile , id:auth?.user?.id,image:file }));
         }
+
+        console.log("test");
         reader.readAsDataURL(file);
       }
 
     const changeHandler = (e) => setProfile({...profile,[e.target.name]:e.target.value});
   
-
     return (
         <div className="w-full">
             <Navbar/>
@@ -77,9 +78,10 @@ const Profile = () => {
                    backgroundPosition:'center',
                    backgroundRepeat:'no-repeat'
                 }}>
-                    {profile?.avatar ? <img  src={avatarRef.current} className="w-[120px] absolute -top-12 left-[50%] -translate-x-[50%] h-[120px] rounded-full"/> : <img src={avatar} className="w-[120px] absolute -top-12 left-[50%] -translate-x-[50%] h-[120px] rounded-full"/> }
+                    {profile?.avatar ? <img src={profile?.avatar.length > 40 ? profile?.avatar : `http://127.0.0.1:8000/storage/profile_image/${profile?.avatar}`} className="w-[120px] absolute -top-12 left-[50%] -translate-x-[50%] h-[120px] rounded-full"/> : <img src={avatar} className="w-[120px] absolute -top-12 left-[50%] -translate-x-[50%] h-[120px] rounded-full"/> }
                     <div className="flex items-center justify-center mt-16">
-                    <input  onChange={imageHandler} type="file" id="avatar" name="avatar" className="hidden"/>
+                
+                    <input formEncType="multipart/form-data" onChange={imageHandler} type="file" id="avatar" name="avatar" className="hidden"/>
                     <label for="avatar">
                     <span className="cursor-pointer border-2 border-white text-white text-sm font-semibold rounded-full py-2 px-6">Change Profile</span>
                     </label>
@@ -96,7 +98,7 @@ const Profile = () => {
                         </div>
                         <div className="flex items-center justify-between">
                             <p className="text-white font-semibold mr-8">Birthday :</p>
-                            <input onChange={changeHandler} name="birthday" className="w-[85%] py-2 px-3 bg-transparent text-white outline-none border border-white rounded-md" type='date' placeholder="Birthday"/>
+                            <input onChange={changeHandler} name="birthday" value={profile?.birthday} className="w-[85%] py-2 px-3 bg-transparent text-white outline-none border border-white rounded-md" type='date' placeholder="Birthday"/>
                         </div>
                         <div className="flex items-center justify-between">
                             <p className="text-white font-semibold mr-8">Phone :</p>

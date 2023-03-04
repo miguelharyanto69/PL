@@ -46,36 +46,44 @@ class ProfileController extends Controller {
            
     }
 
-    public function avatarUpdate(Request $request,$id) {
+    public function updateAvatar(Request $request,$id) {
         if(!$id) {
             return response()->json(['message'=>'failed upload image']);
         }
 
-        $validate = Validator::make($request->all() , [
-              'avatar'=>['required','mimes:jpeg,png,jpg,gif' ,'size:2048'],
-        ]);
+        // $validate = Validator::make($request->only('avatar'), [
+        //       'avatar'=>['required','mimes:jpeg,png,jpg,gif' ,'size:2048'],
+        // ]);
 
-        if($validate->fails()){
-            return response()->json(['message'=>$validate->errors()->first()], 400);
-        }
+        // if($validate->fails()){
+        //     return response()->json(['message'=>$validate->errors()->first()], 400);
+        // }
 
         $format_image = null;
         $find_user = User::find($id);
 
-        if($request->hasFile('avatar')){
-            $storage = Storage::disk('profile_user');
+        if($request->has('avatar')){
+            $storage = Storage::disk('profile_image');
 
             if($find_user->avatar  != null && $storage->exists($find_user->avatar)){
                 $storage->delete($find_user->avatar);
             }
  
-            $format_image = date("Y_M_D") . '_' . Str::random(12) . '.' . $request->file()->getClientOriginalExtension() ;
+            $format_image =  date("Y_M_D") . '_' . Str::random(12) . '.' . $request->file('avatar')->getClientOriginalExtension() ;
 
-            $storage->putFileAs(null , $request->file, $format_image ,[]);
+            
+            $storage->putFileAs(null , $request->file('avatar'), $format_image ,[]);
         }
 
-        if($format_image) {
+        
+        $find_user->avatar = $format_image;
+
+        $saved = $find_user->save();
+
+        if($saved && $format_image) {
             return response()->json(['avatar'=>$format_image]);
         }
+
+        return response()->json(['message'=>'failed upload photo'] , 400);
     }
 }

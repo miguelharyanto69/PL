@@ -27,11 +27,12 @@ const Movies = () => {
     const [movies,setMovies] = useState(null);
 
     useEffect(() => {
+
+      document.title = `Movies | All`;
+
       if(auth.token && auth.token != 'null') {
          fetchMovies('now_playing' , setMovies);
-      } else {
-         navigate("/auth/login");
-      }
+      } 
     },[auth]);
 
     return (
@@ -58,8 +59,8 @@ const Movies = () => {
         className="mySwiper mt-7"
       >
          {Array.isArray(movies) && movies.map((movie,idx) => (
-           <Link to={`/movie/${movie?.id}`}>
-           <SwiperSlide key={idx}>
+           <Link key={idx} to={`/movie/${movie?.id}`}>
+           <SwiperSlide className="cursor-pointer" key={idx}>
            <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
           </SwiperSlide>
            </Link>
@@ -91,7 +92,7 @@ const Movies = () => {
       >
 
                 {Array.isArray(movies) && movies.map((movie,idx)=>(
-                   <SwiperSlide key={idx}>
+                   <SwiperSlide className="cursor-pointer" key={idx}>
                    <Link to={`/movie/${movie.id}`}>
                    <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
                    </Link>
