@@ -43,15 +43,40 @@ export const createData = createAsyncThunk('create/data' , async ({ adminForm , 
 
     try {
         if(adminForm?.publish === "spotlight"){
-           const { data } = await API.post("/create/spotlight/" + id ,formData);
-           navigate("/admin");
+           const request = await API.post("/create/spotlight/" + id ,formData);
+           window.location.href = "/admin";
         }
-        const { data } = await API.post("/create/news/" + id ,formData);
-        navigate("/admin");
-        
+        const request = await API.post("/create/news/" + id ,formData);
+        window.location.href = "/admin";        
     } catch(err) {
         return null
     }
+});
+
+export const updateData = createAsyncThunk('update/data' , async ({ adminForm , id }) => {
+    const formData = new FormData();
+
+    formData.append('title',adminForm?.title);
+    formData.append('article',adminForm.article);
+    formData.append('thumbnail',adminForm.thumbnail);
+
+    if(adminForm.publish === "spotlight") {
+         const { data } = await API.post("/update/spotlight/" + id, formData);
+         window.location.href = "/admin";
+    }else {
+        const { data } = await API.post("/update/news/" + id ,formData);
+         window.location.href = "/admin";
+    }
+});
+
+export const deleteNews = createAsyncThunk('news/delete' , async (id) => {
+       await API.delete('/delete/news/' + id);
+       return id;
+});
+
+export const deleteSpotlight = createAsyncThunk('spotlight/delete' , async (id) => {
+       await API.delete('/delete/spotlight/' + id);
+       return id;
 });
 
 const AdminSlice = createSlice({
@@ -75,6 +100,24 @@ const AdminSlice = createSlice({
                 return state;
             }
        });
+
+       builder.addCase(deleteNews.fulfilled,(state, { payload }) => {
+            const filtered = state.news.filter((news)=>news.id !== payload ? news : "");
+
+            console.log(filtered);
+
+            state.news = filtered;
+
+            return state;
+       });
+
+       builder.addCase(deleteSpotlight.fulfilled,(state, { payload }) => {
+        const filtered = state.spotlight.filter((spotlight)=>spotlight.id !== payload ? spotlight : "");
+
+        state.spotlight = filtered;
+
+        return state;
+   });
     }
 });
 

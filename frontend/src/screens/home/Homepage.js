@@ -7,6 +7,7 @@ import light from "../../assets/image/light-bg.png";
 import dark from "../../assets/image/dark-bg.png";
 import axios from 'axios';
 import { fetchMovies } from "../../api";
+import { FiTrash,FiEdit3 } from 'react-icons/fi';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -91,7 +92,35 @@ const Homepage = () => {
                   <Link to="/admin/create">
                     <button className="mt-7 bg-orange-500 text-white font-semibold  py-2 px-5 rounded-full">Create Spotlight</button>
                   </Link>
-                </div> : null}
+                </div> : (
+                      <Swiper  
+                      spaceBetween={15}
+                      autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: true,
+                      }}
+                      pagination={{
+                        clickable: true,
+                      }}
+                      slidesPerView={4}
+                      loop={true}
+                      navigation={false}
+                      modules={[Autoplay, Pagination, Navigation]}
+                     className="mt-7 mySwiper">
+                         {Array.isArray(admin.spotlight) && admin.spotlight.map((spotlight,idx) => (
+                           <SwiperSlide className="w-full">
+                                <Link key={idx}  to={`/detail/spotlight/${spotlight?.id}`}>
+                                 <img src={`http://127.0.0.1:8000/storage/spotlight_image/${spotlight?.thumbnail}`} className="w-full h-[210px] rounded-lg" />
+                                 <div className="mt-2">
+                                     <h5 className="text-white font-bold text-lg">{spotlight?.title}</h5>
+                                     <p className="text-gray-300 text-sm mt-1">{spotlight?.article?.substring(0,40)}...</p>
+                                 </div>
+                                
+                           </Link>
+                             </SwiperSlide>
+                         ))}
+                     </Swiper>
+                )}
              </section> 
              <section className="py-20 px-20">
              <h2 className="text-xl uppercase font-bold text-white">coming soon</h2>

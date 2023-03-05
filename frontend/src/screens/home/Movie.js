@@ -55,6 +55,19 @@ const Movie = () => {
                     </div>
                   </div>
                 </div>
+                <div className='mt-5'>
+                <div className='flex items-center justify-between'>
+                    <h3 className='text-lg font-bold text-white uppercase'>ayani xxi</h3>
+                    <p className='text-md text-gray-300 font-semibold'>Rp 70.000</p>
+                </div>
+                <div className='flex items-center mt-4 gap-x-3'>
+                    <button className='border border-white text-white rounded-full py-2 px-5'>13:00 PM</button>
+                    <button className='border border-white text-white rounded-full py-2 px-5'>15:00 PM</button>
+                    <button className='border border-white text-white rounded-full py-2 px-5'>17:00 PM</button>
+                    <button className='border border-white text-white rounded-full py-2 px-5'>20:00 PM</button>
+
+                </div>
+                </div>
                 <div className='border-t border-white mt-5 pt-5'>
                     <h2 className='text-xl text-white uppercase font-bold'>synopsis</h2>
                     <p className='text-gray-300 mt-3 leading-5 text-sm'>{movie?.overview}</p>

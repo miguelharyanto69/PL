@@ -9,6 +9,9 @@ import Chat from "./home/Chat";
 import HomeAdmin from "./admin/HomeAdmin";
 import Create from "./admin/Create";
 import News from "./home/News";
+import Update from "./admin/Update";
+import DetailNews from "./home/DetailNews";
+import PickSeats from "./home/PickSeats";
 
 //nesting main
 import Auth from "./auth/Main";
@@ -29,5 +32,8 @@ export {
     MainAdmin,
     HomeAdmin,
     Create,
-    News
+    News,
+    Update,
+    DetailNews,
+    PickSeats
 };

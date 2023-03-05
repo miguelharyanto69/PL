@@ -26,8 +26,22 @@ Route::group(['prefix'=>'/profile'] , function(){
 Route::group(['prefix'=>'/admin'] ,function(){
      Route::get('/all/news', [AdminController::class, 'all_news'])->name('all.news');
      Route::get('/all/spotlight', [AdminController::class,'all_spotlight'])->name('all.spotlight');
+
+     //create spotlight & news
      Route::post("/create/news/{id}", [AdminController::class,'create_news'])->name('create.news');
      Route::post("/create/spotlight/{id}", [AdminController::class,"create_spotlight"])->name('create.spotlight');  
+
+     //delete spotlight & news
+     Route::delete('/delete/news/{id}',[AdminController::class,'deleteNews']);
+     Route::delete('/delete/spotlight/{id}',[AdminController::class,'deleteSpotlight']);
+     
+     //update spotlight & news
+     Route::post("/update/news/{id}",[AdminController::class,'updateNews']);
+     Route::post("/update/spotlight/{id}",[AdminController::class,'updateSpotlight']);
+
+     //detail
+     Route::get('/detail/{id}',[AdminController::class,'detail']);
+
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
