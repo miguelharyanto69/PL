@@ -45,14 +45,16 @@ const HomeAdmin = () => {
                  pagination={{
                    clickable: true,
                  }}
-                 slidesPerView={4}
+                 slidesPerView={3}
                  loop={true}
                  navigation={false}
                  modules={[Autoplay, Pagination, Navigation]}
                 className="mt-7 mySwiper">
                     {Array.isArray(admin.spotlight) && admin.spotlight.map((spotlight,idx) => (
                         <SwiperSlide key={idx} className="w-full">
-                            <img src={`http://127.0.0.1:8000/storage/spotlight_image/${spotlight?.thumbnail}`} className="w-full h-[210px] rounded-lg" />
+                            <Link to={`/detail/spotlight/${spotlight.id}`}>
+                            <img src={`http://127.0.0.1:8000/storage/spotlight_image/${spotlight?.thumbnail}`} className="w-full h-[240px] rounded-lg" />
+                            </Link>
                             <div className="mt-2">
                                 <h5 className="text-white font-bold text-lg">{spotlight?.title}</h5>
                                 <p className="text-gray-300 text-sm mt-1">{spotlight?.article?.substring(0,40)}...</p>
@@ -80,14 +82,16 @@ const HomeAdmin = () => {
                    pagination={{
                      clickable: true,
                    }}
-                   slidesPerView={4}
+                   slidesPerView={3}
                    loop={true}
                    navigation={false}
                    modules={[Autoplay, Pagination, Navigation]}
                   className="mt-7 mySwiper">
                       {Array.isArray(admin.news) && admin.news.map((news,idx) => (
                           <SwiperSlide key={idx} className="w-full">
-                              <img src={`http://127.0.0.1:8000/storage/news_image/${news?.thumbnail}`} className="w-full h-[210px] rounded-lg" />
+                            <Link to={`/detail/news/${news.id}`}>
+                            <img src={`http://127.0.0.1:8000/storage/news_image/${news?.thumbnail}`} className="w-full h-[240px] rounded-lg" />
+                            </Link>
                               <div className="mt-2">
                                   <h5 className="text-white font-bold text-lg">{news?.title}</h5>
                                   <p className="text-gray-300 text-sm mt-1">{news?.article?.substring(0,40)}...</p>

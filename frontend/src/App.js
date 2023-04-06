@@ -16,7 +16,10 @@ import {
   News,
   Update,
   DetailNews,
-  PickSeats
+  MainTickets,
+  PickSeats,
+  MovieTicketOrder,
+  Checkout
 } from "./screens";
 
 function App() {
@@ -32,9 +35,14 @@ function App() {
       <Route path="/news" element={<News/>}/>
       <Route path="/detail/spotlight/:id" element={<DetailNews/>}/>
       <Route path="/detail/news/:id" element={<DetailNews/>}/> 
-      <Route path="/pickseats" element={<PickSeats/>}/>
-
       </Route>
+
+      <Route path="/tickets" element={<MainTickets/>}>
+        <Route path="movie-order/:id" element={<MovieTicketOrder/>}/>
+        <Route path="pickseats" element={<PickSeats/>}/>
+        <Route path="checkout" element={<Checkout/>}/>
+      </Route>
+
       <Route path="/admin" element={<MainAdmin/>}>
         <Route index element={<HomeAdmin/>}/>
         <Route path="create" element={<Create/>}/>

@@ -9,16 +9,20 @@ import Chat from "./home/Chat";
 import HomeAdmin from "./admin/HomeAdmin";
 import Create from "./admin/Create";
 import News from "./home/News";
+import Checkout from "./tickets/Checkout";
 import Update from "./admin/Update";
 import DetailNews from "./home/DetailNews";
-import PickSeats from "./home/PickSeats";
+import PickSeats from "./tickets/PickSeats";
+import MovieTicketOrder from "./tickets/MovieTicketOrder";
 
 //nesting main
 import Auth from "./auth/Main";
 import MainHome from "./home/MainHome";
 import MainAdmin from "./admin/MainAdmin";
+import MainTickets from "./tickets/MainTickets";
 
 export {
+    MainTickets,
     Login,
     Register,
     Homepage,
@@ -35,5 +39,7 @@ export {
     News,
     Update,
     DetailNews,
-    PickSeats
+    PickSeats,
+    MovieTicketOrder,
+    Checkout
 };

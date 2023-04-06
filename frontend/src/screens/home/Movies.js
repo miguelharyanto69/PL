@@ -42,7 +42,7 @@ const Movies = () => {
                 backgroundImage:`url(${dark})`,
                 backgroundSize:'cover',
                 backgroundPosition:'center',
-            }} className="w-full px-20 py-10">
+            }} className="w-full px-20 py-10 min-h-screen">
               <div className=" w-[80%] mx-auto">
               <h2 className="uppercase font-bold text-white text-2xl">movies</h2>
                    <Swiper
@@ -59,11 +59,11 @@ const Movies = () => {
         className="mySwiper mt-7"
       >
          {Array.isArray(movies) && movies.map((movie,idx) => (
-           <Link key={idx} to={`/movie/${movie?.id}`}>
            <SwiperSlide className="cursor-pointer" key={idx}>
+             <Link key={idx} to={`/tickets/movie-order/${movie?.id}`}>
            <img className="w-full rounded-lg" src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
-          </SwiperSlide>
            </Link>
+          </SwiperSlide>
          ))}
       </Swiper>
               </div>

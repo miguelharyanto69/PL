@@ -45,7 +45,7 @@ const Login = () => {
                     <input placeholder="Password" type="password" onChange={changeHandler} name="password" className="border-b outline-none border-gray-300 pb-3 w-[450px]" value={loginForm?.password}/>
                     <button className="mt-5 rounded-full text-md font-semibold text-white py-2 bg-orange-400">Sign In</button>
                 </form>
-                <p className="text-gray-500 text-sm text-center mt-3">Don't have account? <Link className="text-orange-400 font-bold" to="/register">Register</Link></p>
+                <p className="text-gray-500 text-sm text-center mt-3">Don't have account? <Link className="text-orange-400 font-bold" to="/auth/register">Register</Link></p>
             </section>
         </div>
     )

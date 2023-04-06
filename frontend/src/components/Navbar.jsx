@@ -63,7 +63,7 @@ const Navbar = () => {
         
         </ul>
        {openDropDown ? (
-         <div className='bg-white py-4 px-10 rounded-lg flex flex-col gap-y-3 absolute -bottom-[190px] right-12'>
+         <div className='bg-white z-[999] py-4 px-10 rounded-lg flex flex-col gap-y-3 absolute -bottom-[190px] right-12'>
           <Link to="/profile" className="flex items-center gap-x-3 text-gray-600">
              <HiOutlineUserCircle className="text-xl"/>
              <p>Profile</p>
@@ -72,7 +72,7 @@ const Navbar = () => {
              <HiOutlineTicket className="text-xl"/>
              <p>Tickets</p>
           </Link>
-          <Link to="/" className="flex items-center gap-x-3 text-gray-600">
+          <Link to="/chat" className="flex items-center gap-x-3 text-gray-600">
              <BsChatLeft className="text-xl"/>
              <p>Chat</p>
           </Link>

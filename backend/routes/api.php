@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Tickets\TicketController;;
 
 
 //auth prefix
@@ -42,6 +43,13 @@ Route::group(['prefix'=>'/admin'] ,function(){
      //detail
      Route::get('/detail/{id}',[AdminController::class,'detail']);
 
+});
+
+//ticket routes
+
+Route::group(['prefix'=>'ticket'] , function($router) {
+     Route::get('/all/{id}', [TicketController::class,'allTickets']);
+     Route::post('/checkout' , [TicketController::class,'checkoutHandler']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

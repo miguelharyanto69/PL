@@ -17,6 +17,7 @@ const Create = () => {
      article:"",
      thubmnail:null 
  });
+ const [imagePreview,setImagePreview] = useState(null);
 
  const changeHandler = (e) => setAdminForm({...adminForm , [e.target.name]:e.target.value});
 
@@ -24,6 +25,7 @@ const Create = () => {
     const file = element.target.files[0];
     const reader = new FileReader();
     reader.onloadend = function() {
+        setImagePreview(reader.result);
         setAdminForm({...adminForm ,thumbnail:file});
     }
 
@@ -55,11 +57,13 @@ const Create = () => {
                 <div className='flex items-start justify-between'>
                     <h5 className='text-white text-md font-medium'>Thumbnail</h5>
                     <input onChange={imageHandler} type="file" className='hidden' name='thumbnail' id='thumbnail'/>
-                    <label for="thumbnail" className='w-[80%] flex justify-center items-center border-dashed border-2 border-white h-[250px]'>
-                        <span className='cursor-pointer text-xl font-semibold flex flex-col justify-center items-center text-white'>
-                            <MdOutlineImage className='text-[70px] mb-2'/>
-                            Upload Image
-                        </span>
+                    <label for="thumbnail" className='w-[80%] py-3 px-3 flex justify-center items-center border-dashed border-2 border-white h-[250px]'>
+                       {imagePreview ? <img src={imagePreview} className="rounded-lg w-full h-full"/> : (
+                         <span className='cursor-pointer text-xl font-semibold flex flex-col justify-center items-center text-white'>
+                         <MdOutlineImage className='text-[70px] mb-2'/>
+                         Upload Image
+                     </span>
+                       )}
                     </label>
                 </div>
                 <div className='flex items-start justify-between'>
