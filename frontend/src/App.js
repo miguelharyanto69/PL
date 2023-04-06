@@ -19,7 +19,8 @@ import {
   MainTickets,
   PickSeats,
   MovieTicketOrder,
-  Checkout
+  Checkout,
+  UserTickets
 } from "./screens";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="movie-order/:id" element={<MovieTicketOrder/>}/>
         <Route path="pickseats" element={<PickSeats/>}/>
         <Route path="checkout" element={<Checkout/>}/>
+        <Route path="user-ticket" element={<UserTickets/>}/>
       </Route>
 
       <Route path="/admin" element={<MainAdmin/>}>

@@ -40,12 +40,12 @@ const PickSeats = () => {
          <section className="w-[90%] mx-auto py-12 flex items-start justify-between">
             <div className="grid grid-cols-8 gap-4">
               {seats.slice(0,39).map((seat,idx) => (
-                <button onClick={()=>chooseSeats(seat)} className={`text-sm w-full border-2 ${seatPicks[idx] == seat ? "bg-white" : "border-white"} rounded-md ${seatPicks[idx]  == seat ? "text-black" : "text-white"} font-semibold py-2 px-3`} key={idx}>A{seat+1}</button>
+                <button onClick={()=>chooseSeats(seat)} className={`text-sm w-full border-2 ${seatPicks[idx] == seat ? "bg-white" : "border-white"} rounded-md ${seatPicks[idx]  == seat ? "text-black" : "text-white"} font-semibold py-2 px-3`} key={idx}>{seat+1}</button>
               ))}
             </div>
             <div className="grid grid-cols-8 gap-4">
               {seats.slice(40,79).map((seat,idx) => (
-                <button onClick={()=>chooseSeats(seat,idx)} className={`text-sm w-full border-2 ${seatPicks[idx] == seat ? "bg-white" : "border-white"} rounded-md ${seatPicks[idx]  == seat ? "text-black" : "text-white"} font-semibold py-2 px-3`} key={idx}>A{seat}</button>
+                <button onClick={()=>chooseSeats(seat,idx)} className={`text-sm w-full border-2 ${seatPicks[idx] == seat ? "bg-white" : "border-white"} rounded-md ${seatPicks[idx]  == seat ? "text-black" : "text-white"} font-semibold py-2 px-3`} key={idx}>{seat}</button>
               ))}
             </div>
          </section>

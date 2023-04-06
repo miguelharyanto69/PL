@@ -14,6 +14,7 @@ import Update from "./admin/Update";
 import DetailNews from "./home/DetailNews";
 import PickSeats from "./tickets/PickSeats";
 import MovieTicketOrder from "./tickets/MovieTicketOrder";
+import UserTickets from "./tickets/UserTickets";
 
 //nesting main
 import Auth from "./auth/Main";
@@ -41,5 +42,6 @@ export {
     DetailNews,
     PickSeats,
     MovieTicketOrder,
-    Checkout
+    Checkout,
+    UserTickets
 };

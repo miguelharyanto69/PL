@@ -68,7 +68,7 @@ const Navbar = () => {
              <HiOutlineUserCircle className="text-xl"/>
              <p>Profile</p>
           </Link>
-          <Link to="/" className="flex items-center gap-x-3 text-gray-600">
+          <Link to="/tickets/user-ticket" className="flex items-center gap-x-3 text-gray-600">
              <HiOutlineTicket className="text-xl"/>
              <p>Tickets</p>
           </Link>

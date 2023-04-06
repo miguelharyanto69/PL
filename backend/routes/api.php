@@ -49,7 +49,7 @@ Route::group(['prefix'=>'/admin'] ,function(){
 
 Route::group(['prefix'=>'ticket'] , function($router) {
      Route::get('/all/{id}', [TicketController::class,'allTickets']);
-     Route::post('/checkout' , [TicketController::class,'checkoutHandler']);
+     Route::post('/checkout/{id}' , [TicketController::class,'checkoutHandler']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
